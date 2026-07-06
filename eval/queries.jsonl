@@ -1,0 +1,26 @@
+{"query": "How do I run a script when the agent session starts?", "expected_ids": ["create-hook"], "difficulty": "easy"}
+{"query": "Block dangerous shell commands before they run", "expected_ids": ["create-hook"], "difficulty": "easy"}
+{"query": "Set up beforeShellExecution hook in hooks.json", "expected_ids": ["create-hook"], "difficulty": "medium"}
+{"query": "Inject context before each user prompt", "expected_ids": ["create-hook"], "difficulty": "medium"}
+{"query": "Automate behavior around agent tool use events", "expected_ids": ["create-hook"], "difficulty": "medium"}
+{"query": "How do I add persistent AI guidance for my project?", "expected_ids": ["create-rule"], "difficulty": "easy"}
+{"query": "Write a .cursor/rules file for coding standards", "expected_ids": ["create-rule"], "difficulty": "easy"}
+{"query": "Create AGENTS.md for team conventions", "expected_ids": ["create-rule"], "difficulty": "medium"}
+{"query": "Set up project-level rules for the agent", "expected_ids": ["create-rule"], "difficulty": "medium"}
+{"query": "How do I write a new Agent Skill?", "expected_ids": ["create-skill"], "difficulty": "easy"}
+{"query": "What goes in SKILL.md frontmatter?", "expected_ids": ["create-skill"], "difficulty": "easy"}
+{"query": "Create a skill for my custom workflow", "expected_ids": ["create-skill"], "difficulty": "medium"}
+{"query": "Add a new skill to .cursor/skills", "expected_ids": ["create-skill"], "difficulty": "medium"}
+{"query": "Extract tables from a PDF document", "expected_ids": ["pdf-processing"], "difficulty": "easy"}
+{"query": "Fill out PDF form fields programmatically", "expected_ids": ["pdf-processing"], "difficulty": "easy"}
+{"query": "Merge multiple PDF files into one", "expected_ids": ["pdf-processing"], "difficulty": "medium"}
+{"query": "Parse text from a scanned PDF", "expected_ids": ["pdf-processing"], "difficulty": "medium"}
+{"query": "Deploy my app to a Kubernetes cluster", "expected_ids": ["deploy-kubernetes"], "difficulty": "easy"}
+{"query": "Create a Helm chart for deployment", "expected_ids": ["deploy-kubernetes"], "difficulty": "easy"}
+{"query": "Set up kubectl deployment and service", "expected_ids": ["deploy-kubernetes"], "difficulty": "medium"}
+{"query": "Configure ConfigMaps and Secrets in k8s", "expected_ids": ["deploy-kubernetes"], "difficulty": "medium"}
+{"query": "I need hooks for cursor agent lifecycle", "expected_ids": ["create-hook"], "difficulty": "hard"}
+{"query": "Team coding standards in cursor rules", "expected_ids": ["create-rule"], "difficulty": "hard"}
+{"query": "Authoring markdown skills for the agent", "expected_ids": ["create-skill"], "difficulty": "hard"}
+{"query": "Working with PDF documents and forms", "expected_ids": ["pdf-processing"], "difficulty": "hard"}
+{"query": "Roll out application to production cluster", "expected_ids": ["deploy-kubernetes"], "difficulty": "hard"}
