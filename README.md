@@ -168,6 +168,100 @@ twine upload dist/*
 
 This package does not replace Cursor's built-in skill description injection. For large skill libraries, pair with `disable-model-invocation: true` on skills and use this registry via hooks or MCP (planned v2) to route queries.
 
+## LangGraph deep agent integration
+
+Use `skillregistry` as the **retrieval layer** (like [langgraph-bigtool](https://github.com/langchain-ai/langgraph-bigtool) for tools) and LangGraph as the **agent loop**. Skills are markdown instructions — retrieve and load them into context instead of executing Python functions.
+
+### Architecture
+
+```
+User query → retrieve_skills(query) → load_skill(id) → LLM follows SKILL.md → (optional) retrieve again
+```
+
+1. **Startup** — load a pre-built index (one-time registration, no per-turn indexing cost)
+2. **Per task** — agent calls `retrieve_skills` for top-k matches
+3. **Load** — agent calls `load_skill` to get full `SKILL.md` body
+4. **Deep agent** — multi-hop: retrieve → load → reason → retrieve again for sub-tasks
+
+### LangGraph install
+
+```bash
+pip install skillregistry[local,openai]
+pip install langgraph langchain-openai langchain-core
+```
+
+### Build the registry (once)
+
+```bash
+skillregistry register ~/.cursor/skills .cursor/skills \
+  -o .skill-index \
+  --llm openai:gpt-4o-mini \
+  --embedder local
+```
+
+### LangGraph tools
+
+```python
+from langchain_core.tools import tool
+from skillregistry import SkillRegistry
+
+registry = SkillRegistry.from_directory(".skill-index")
+
+@tool
+def retrieve_skills(query: str, top_k: int = 3) -> str:
+    """Search the skill library for skills relevant to the user's task."""
+    matches = registry.retrieve(query, top_k=top_k)
+    if not matches:
+        return "No matching skills found."
+    return "Matching skills:\n" + "\n".join(
+        f"- id={m.id} name={m.name} score={m.score:.3f}: {m.description}"
+        for m in matches
+    )
+
+@tool
+def load_skill(skill_id: str) -> str:
+    """Load full instructions for a skill by id or name. Call after retrieve_skills."""
+    doc = registry.load_skill(skill_id)
+    return f"# Skill: {doc.record.name}\n\n{doc.body}"
+```
+
+### ReAct agent
+
+```python
+from langgraph.prebuilt import create_react_agent
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4o-mini")
+agent = create_react_agent(llm, [retrieve_skills, load_skill])
+
+result = agent.invoke({
+    "messages": [("user", "I want to block curl commands when the agent session starts")]
+})
+```
+
+### Recommended system prompt
+
+```text
+You have access to a skill library via retrieve_skills and load_skill.
+
+Workflow:
+1. For every new user task, call retrieve_skills with a short search query.
+2. Call load_skill for the best match before giving detailed guidance.
+3. Follow the loaded skill instructions precisely.
+4. If the task spans multiple domains, retrieve and load additional skills.
+
+Do not guess skill content — always load_skill first.
+```
+
+### skillregistry vs skillweaver
+
+| Use case | Package |
+|----------|---------|
+| Retrieve + load one skill per step | **skillregistry** |
+| Complex multi-skill tasks with decomposition and DAG | **skillweaver-routing** |
+
+For most LangGraph agents, start with **skillregistry**; add skillweaver when tasks routinely need multiple skills composed in order.
+
 ## License
 
 MIT
