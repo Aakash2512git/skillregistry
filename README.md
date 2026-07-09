@@ -248,6 +248,19 @@ User query → retrieve_skills(query) → load_skill(id) → LLM follows SKILL.m
 
 ```bash
 pip install skillregistry[local,openai]
+pip install deepagents langchain-openai
+```
+
+Runnable example: [`examples/deepagents_integration.py`](examples/deepagents_integration.py)
+
+```bash
+skillregistry register tests/fixtures/skills -o .skill-index --llm mock --embedder mock
+python examples/deepagents_integration.py --index .skill-index --query "Help me debug a flaky test"
+```
+
+For raw LangGraph (without Deep Agents):
+
+```bash
 pip install langgraph langchain-openai langchain-core
 ```
 
