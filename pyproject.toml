@@ -1,6 +1,6 @@
 [project]
 name = "skillregistry"
-version = "0.1.0"
+version = "0.1.1"
 description = "Semantic skill registry for LLM agents — register, retrieve, and evaluate Cursor-style skills"
 readme = "README.md"
 license = { text = "MIT" }
@@ -29,6 +29,11 @@ local = ["sentence-transformers>=3.0", "faiss-cpu>=1.8"]
 openai = ["openai>=1.0"]
 dev = ["pytest>=8.0", "build>=1.0", "ruff>=0.4"]
 all = ["skillregistry[local,openai,dev]"]
+
+[project.urls]
+Homepage = "https://github.com/Aakash2512git/skillregistry"
+Repository = "https://github.com/Aakash2512git/skillregistry"
+Documentation = "https://github.com/Aakash2512git/skillregistry#readme"
 
 [project.scripts]
 skillregistry = "skillregistry.cli:app"
