@@ -6,7 +6,22 @@ Inspired by the [langgraph-bigtool](https://github.com/langchain-ai/langgraph-bi
 
 ## Install
 
+From [TestPyPI](https://test.pypi.org/project/skillregistry/) (current release):
+
 ```bash
+pip install -i https://test.pypi.org/simple/ skillregistry
+```
+
+Production setup (OpenAI metadata + local embeddings):
+
+```bash
+pip install -i https://test.pypi.org/simple/ "skillregistry[local,openai]"
+```
+
+For development from source:
+
+```bash
+git clone https://github.com/Aakash2512git/skillregistry.git
 cd skillregistry
 pip install -e ".[all]"
 ```
@@ -138,6 +153,44 @@ skillregistry eval --paths tests/fixtures/skills -d eval/queries.jsonl -r report
 
 Metrics: **Recall@k**, **MRR**, **latency p50**. See [eval/README.md](eval/README.md).
 
+### Benchmark results
+
+Evaluated on two datasets with the built-in harness (`Recall@1`, `MRR`, median latency):
+
+| Dataset | Skills | LLM | Embedder | Index mode | Recall@1 | MRR | Latency p50 |
+|---------|--------|-----|----------|------------|----------|-----|-------------|
+| Fixtures | 5 | mock | mock | full | 96.2% | 0.962 | ~0 ms |
+| Fixtures | 5 | OpenAI | local | full | **100%** | 1.000 | 7.3 ms |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | 38 | mock | local | full | 70.0% | 0.700 | 7.9 ms |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | 38 | OpenAI | local | description | 70.0% | 0.700 | 7.2 ms |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | 38 | OpenAI | local | **full** | **80.0%** | **0.800** | 7.1 ms |
+
+**Key finding:** On the 38-skill mattpocock library, full metadata indexing (description + LLM-generated trigger questions + tags) outperforms description-only by **+10 points** Recall@1 — validating LLM-enriched routing metadata.
+
+Reproduce the mattpocock benchmark:
+
+```bash
+export OPENAI_API_KEY=sk-...
+
+skillregistry register external/mattpocock-skills/skills \
+  -o .mattpocock-openai-local \
+  --llm openai:gpt-4o-mini \
+  --embedder local
+
+skillregistry eval -i .mattpocock-openai-local \
+  -d eval/mattpocock_queries.jsonl \
+  -r reports/mattpocock_eval_openai_local.md
+
+# Ablation: description-only vs full
+skillregistry eval \
+  --paths external/mattpocock-skills/skills \
+  -d eval/mattpocock_queries.jsonl \
+  --llm openai:gpt-4o-mini \
+  --embedder local \
+  --ablate \
+  -r reports/mattpocock_ablation_openai_local.md
+```
+
 ## CLI reference
 
 | Command | Description |
@@ -161,6 +214,11 @@ Metrics: **Recall@k**, **MRR**, **latency p50**. See [eval/README.md](eval/READM
 ```bash
 pip install build twine
 python -m build
+
+# TestPyPI (staging)
+twine upload --repository testpypi dist/*
+
+# Production PyPI
 twine upload dist/*
 ```
 

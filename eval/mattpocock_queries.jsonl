@@ -1,0 +1,30 @@
+{"query": "I want to write tests first before implementing this feature", "expected_ids": ["tdd"], "difficulty": "easy"}
+{"query": "Help me debug this flaky test that's failing intermittently", "expected_ids": ["diagnosing-bugs"], "difficulty": "easy"}
+{"query": "Something is broken and throwing errors in production", "expected_ids": ["diagnosing-bugs"], "difficulty": "easy"}
+{"query": "Review my branch changes against the spec and coding standards", "expected_ids": ["code-review"], "difficulty": "easy"}
+{"query": "Can you review the diff since the last commit?", "expected_ids": ["code-review"], "difficulty": "medium"}
+{"query": "Turn our conversation into a spec and publish it to GitHub issues", "expected_ids": ["to-spec"], "difficulty": "easy"}
+{"query": "Break this plan into tracer-bullet tickets with blocking dependencies", "expected_ids": ["to-tickets"], "difficulty": "easy"}
+{"query": "Implement the work described in this spec using test-driven development", "expected_ids": ["implement"], "difficulty": "medium"}
+{"query": "Which skill should I use for my current situation?", "expected_ids": ["ask-matt"], "difficulty": "easy"}
+{"query": "Interview me about my design before I start building", "expected_ids": ["grill-me"], "difficulty": "easy"}
+{"query": "Grill me on this plan and also update CONTEXT.md as we go", "expected_ids": ["grill-with-docs"], "difficulty": "medium"}
+{"query": "Help me define ubiquitous language for this domain", "expected_ids": ["domain-modeling"], "difficulty": "easy"}
+{"query": "Record an architectural decision and update the glossary", "expected_ids": ["domain-modeling"], "difficulty": "medium"}
+{"query": "Scan my codebase for modules that need deepening", "expected_ids": ["improve-codebase-architecture"], "difficulty": "easy"}
+{"query": "My codebase has become a ball of mud, help me refactor the architecture", "expected_ids": ["improve-codebase-architecture"], "difficulty": "medium"}
+{"query": "Design a deep module with a clean interface at the right seam", "expected_ids": ["codebase-design"], "difficulty": "easy"}
+{"query": "Triage these GitHub issues and categorize them", "expected_ids": ["triage"], "difficulty": "easy"}
+{"query": "Move issues through the triage state machine", "expected_ids": ["triage"], "difficulty": "medium"}
+{"query": "Build a throwaway prototype to answer a design question", "expected_ids": ["prototype"], "difficulty": "easy"}
+{"query": "Research this API and write up findings in a markdown file", "expected_ids": ["research"], "difficulty": "easy"}
+{"query": "Plan a huge multi-session project as investigation tickets", "expected_ids": ["wayfinder"], "difficulty": "easy"}
+{"query": "Resolve this git merge conflict", "expected_ids": ["resolving-merge-conflicts"], "difficulty": "easy"}
+{"query": "Set up issue tracker and triage labels for matt pocock skills", "expected_ids": ["setup-matt-pocock-skills"], "difficulty": "easy"}
+{"query": "Hand off this conversation to another agent", "expected_ids": ["handoff"], "difficulty": "easy"}
+{"query": "Teach me a new concept over multiple sessions", "expected_ids": ["teach"], "difficulty": "easy"}
+{"query": "How do I write a good agent skill?", "expected_ids": ["writing-great-skills"], "difficulty": "easy"}
+{"query": "Set up pre-commit hooks for this repo", "expected_ids": ["setup-pre-commit"], "difficulty": "easy"}
+{"query": "Red-green-refactor loop for fixing this bug", "expected_ids": ["tdd"], "difficulty": "medium"}
+{"query": "Performance regression in the API, need systematic diagnosis", "expected_ids": ["diagnosing-bugs"], "difficulty": "hard"}
+{"query": "Stress-test my plan before I commit to building it", "expected_ids": ["grill-me"], "difficulty": "hard"}
