@@ -1,21 +1,24 @@
 # skillregistry
 
+[![PyPI version](https://img.shields.io/pypi/v/skillregistry)](https://pypi.org/project/skillregistry/)
+[![Python 3.10+](https://img.shields.io/pypi/pyversions/skillregistry)](https://pypi.org/project/skillregistry/)
+
 Semantic skill registry for LLM agents. Scan Cursor-style `SKILL.md` files, auto-generate routing metadata at registration time, and retrieve relevant skills per query.
 
 Inspired by the [langgraph-bigtool](https://github.com/langchain-ai/langgraph-bigtool) pattern: build a registry upfront, search at runtime, load full content only when matched.
 
 ## Install
 
-From [TestPyPI](https://test.pypi.org/project/skillregistry/) (current release):
+From [PyPI](https://pypi.org/project/skillregistry/):
 
 ```bash
-pip install -i https://test.pypi.org/simple/ skillregistry
+pip install skillregistry
 ```
 
 Production setup (OpenAI metadata + local embeddings):
 
 ```bash
-pip install -i https://test.pypi.org/simple/ "skillregistry[local,openai]"
+pip install "skillregistry[local,openai]"
 ```
 
 For development from source:

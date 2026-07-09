@@ -25,8 +25,14 @@ htmlcov/
 
 # Generated index artifacts
 .skill-index/
+.skill-index-*/
+.mattpocock-*/
 *.faiss
 index.pkl
+
+# Local clones / eval artifacts
+external/
+reports/*.xml
 
 # OS
 .DS_Store
